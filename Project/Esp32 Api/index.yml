@@ -1,0 +1,13 @@
+enabled: true
+children:
+  - Hello
+variablesArray: []
+type: Folder
+authData:
+  type: inherit
+requestData:
+  headers: []
+  disabledInheritedHeaders: []
+  strictSSL: Inherit
+  followRedirect: Inherit
+name: Esp32 Api
