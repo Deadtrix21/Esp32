@@ -2,6 +2,6 @@
 This is our final year project
 
 > # Langauges include
-> TypeScript 
-> C++ / Java
-> JaveScript
+> TypeScript <br />
+> C++ / Java <br />
+> JaveScript <br />
