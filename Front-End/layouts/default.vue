@@ -33,7 +33,7 @@
         -->
       <v-list dense nav>
         <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon class="primary">
+          <v-list-item-icon class="">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
@@ -42,15 +42,18 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <ThemeMenu />
+      <section v-show="!mini"><ThemeMenu /></section>
+      
     </v-navigation-drawer>
+    <index/>
   </v-app>
 </template>
 
 <script>
 import ThemeMenu from '~/components/ThemeMenu.vue'
+import Index from '~/pages/index.vue'
 export default {
-  components: { ThemeMenu },
+  components: { ThemeMenu, Index },
   data() {
     return {
       drawer: true,

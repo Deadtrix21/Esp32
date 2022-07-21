@@ -1,6 +1,4 @@
-<!--
-  
-  <template>
+<template>
   <v-app dark>
     <v-navigation-drawer
       v-model="drawer"
@@ -92,4 +90,3 @@ export default {
   },
 }
 </script>
--->

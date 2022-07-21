@@ -1,5 +1,5 @@
-<!--<template lang="">
-      <v-row justify="center" align="center">
+<template lang="">
+  <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <v-card class="logo py-4 d-flex justify-center">
         <NuxtLogo />
@@ -74,16 +74,13 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>ify.js
-￼
+        </v-card-actions> </v-card
+      >ify.js
+    </v-col>
+  </v-row>
+</template>
 
 <script>
-export default {
-    
-}
+export default {}
 </script>
-<style lang="">
-    
-</style>
--->
+<style lang=""></style>
