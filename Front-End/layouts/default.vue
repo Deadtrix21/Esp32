@@ -32,7 +32,11 @@
             ! End
         -->
       <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" link>
+        <v-list-item v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact>
           <v-list-item-icon class="">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -43,9 +47,10 @@
         </v-list-item>
       </v-list>
       <section v-show="!mini"><ThemeMenu /></section>
-      
     </v-navigation-drawer>
-    <index/>
+    <container id="Project" v-show="mini">
+      <Nuxt/>
+    </container>
   </v-app>
 </template>
 
@@ -60,10 +65,17 @@ export default {
       img: null,
       mini: true,
       items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'Photos', icon: 'mdi-image' },
-        { title: 'About', icon: 'mdi-help-box' },
-      ],
+        {
+          icon: 'mdi-apps',
+          title: 'Welcome',
+          to: '/',
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Inspire',
+          to: '/inspire',
+        },
+      ]
     }
   },
   methods: {
@@ -77,5 +89,8 @@ export default {
 <style>
 ::-webkit-scrollbar {
   display: none;
+}
+#Project{
+  padding: 10px 0px 0px 76px;
 }
 </style>

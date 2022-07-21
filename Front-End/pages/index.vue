@@ -1,11 +1,7 @@
 <template>
-<v-main>
-  <v-card class="logo py-4 d-flex justify-center">
-      <NuxtLogo />
-      <VuetifyLogo />
-    </v-card>
-    <p>hello world</p>
-</v-main>
+<div app>
+  <h1>hello</h1>
+</div>
 </template>
 
 <script>
