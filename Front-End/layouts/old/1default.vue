@@ -1,5 +1,7 @@
-<template>
-  <v-app light>
+<!--
+  
+  <template>
+  <v-app dark>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -90,3 +92,4 @@ export default {
   },
 }
 </script>
+-->
