@@ -55,9 +55,9 @@ function VerifyName (val : string) : string | void {
 export default {
     data : function (){
         return {
-            User : new Person(),
+            UserClass : new Person(),
             rules:{
-                name :[():string => {return VerifyName(this.User.FirstName);}]
+                name :[():string | void => {return VerifyName(this.UserClass.FirstName);}]
             }
         }
     },
