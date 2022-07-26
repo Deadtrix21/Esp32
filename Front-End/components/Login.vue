@@ -69,7 +69,7 @@
 
 <script lang="ts">
 import axios from "axios"
-import LoginModule from "components-ts/Login"
+import LoginModule from "@/ts/Login"
 
 const iPerson = new LoginModule.Person();
 const iFormRules = new LoginModule.FormRules();
