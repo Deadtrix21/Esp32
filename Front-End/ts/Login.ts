@@ -19,7 +19,26 @@ interface iFormRules{
 
 // classes
 
+class FormRules implements iFormRules{
+    constructor(){}
 
+
+    public VerifyName (val : string) : string | void {
+        if (val == null || val == ''){return "This field is required."}
+        else if (val.length < 3){return "This needs to be more than 3 char."}
+        return;
+    }
+    
+
+
+    public VerifyEmail (val :string): string | void{
+        if (val == null || val == ''){return 'E-mail is required.'}
+        else if (/.+@.+/.test(val)){return 'E-mail must be valid.'}
+        return;
+    }
+
+
+}
 class Person implements User{
 
     FirstName   : string
