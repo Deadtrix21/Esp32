@@ -8,6 +8,7 @@ class Gen2{
 
     constructor(){
         this.SetupCompose();
+        this.SetupResolve();
     }
 
     SetupResolve():void {
