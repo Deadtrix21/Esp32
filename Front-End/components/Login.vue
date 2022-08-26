@@ -1,64 +1,106 @@
-import { PropOptions } from 'vue';
 <template>
-  <div app>
-    <div>
-        Name: {{ User.FirstName }}
+    <div app>
+        <br><br><br><br>
+        <v-form ref="form" lazy-validation v-model="valid">
+            <v-row justify="center">
+                <v-col lg="3">
+                    <v-text-field
+                        v-model="rPerson.FirstName"
+                        label="First Name"
+                        placeholder="Name"
+                        :rules="rules.fname"
+                        filled
+                        rounded
+                        dense>
+                    </v-text-field>
+                    <v-text-field
+                        v-model="rPerson.LastName"
+                        label="Last Name"
+                        placeholder="Surname"
+                        :rules="rules.lname"
+                        filled
+                        rounded
+                        dense>
+                    </v-text-field>
+                    <v-text-field
+                        v-model="rPerson.Email"
+                        label="Email"
+                        placeholder="developer.dev@outlook.com"
+                        :rules="rules.email"
+                        filled
+                        rounded
+                        dense>
+                    </v-text-field>
+                    <v-text-field
+                        v-model="rPerson.Password"
+                        label="Email"
+                        placeholder="developer.dev@outlook.com"
+                        :rules="rules.email"
+                        filled
+                        rounded
+                        dense>
+                    </v-text-field>
+                    <v-text-field
+                        v-model="PasswordConfirm"
+                        label="Email"
+                        placeholder="developer.dev@outlook.com"
+                        :rules="rules.email"
+                        filled
+                        rounded
+                        dense>
+                    </v-text-field>
+                    <v-col>
+                        <v-btn color="primary" dark small>Sign Up</v-btn>
+                        <v-btn color="error" dark small @click="ClearCurForm()">Cancel</v-btn>
+                        <v-btn color="success" dark small>Log In</v-btn>
+                    </v-col>
+                </v-col>   
+            </v-row>
+        </v-form>
+        <br><br><br><br>
+        <v-card>
+            First Name: {{ rPerson.FirstName }}
+            <br>
+            Last Name: {{ rPerson.LastName }}
+        </v-card>
+        
     </div>
-    <section>
-      <!--
-                    // Note The core Data
-                -->
-      <v-text-field
-        v-model="User.FirstName"
-        label="Name"
-        placeholder="First Name"
-        :rules="rules.name"
-        filled
-        rounded
-        dense
-      >
-      </v-text-field>
-    </section>
-  </div>
 </template>
 
 <script lang="ts">
-interface User{
-    FirstName   : string,
-    LastName    : string,
-    Email       : string,
-}
+import axios from "axios"
+import LoginModule from "@/ts/Login"
 
+const iPerson = new LoginModule.Person();
+const iFormRules = new LoginModule.FormRules();
 
-
-class Person implements User{
-    FirstName   : string
-    LastName    : string
-    Email       : string
-
-    constructor(first:string = "", last:string = "", email:string = ""){
-        this.FirstName = first
-        this.LastName = last
-        this.Email = email
-    }
-}
-
-
-
-
-function VerifyName (val : string) : string | void {
-    if (val == null || val == ''){return "This Field Is REQUIRED"}
-    else if (val.length < 3){return "This Needs To Be More Than 3 Char"}
-    return;
+function ClearForm(): void {
+    iPerson.Email = ''
+    iPerson.FirstName = ''
+    iPerson.LastName = ''  
+    iPerson.Password = ''
 }
 
 export default {
+    
     data : function (){
         return {
-            UserClass : new Person(),
+            valid: true,
+            PasswordConfirm:"",
+            rPerson : iPerson,
             rules:{
-                name :[():string | void => {return VerifyName(this.UserClass.FirstName);}]
+                fname :[():string | void => {return iFormRules.VerifyName(iPerson.FirstName);}],
+                lname :[():string | void => {return iFormRules.VerifyName(iPerson.LastName);}],
+                email :[():string | void => {return iFormRules.VerifyEmail(iPerson.Email);}]
             }
+        }
+    },
+    methods: {
+        ClearCurForm  () {
+            ClearForm()
+            this.$refs.form.reset();
+        },
+        async SignUpPost(){
         }
     },
 }
@@ -66,3 +108,101 @@ export default {
 
 <style scoped></style>
 
+<!--
+
+        this.$axios.post('insert', {
+            name: this.name, 
+            email: this.email,
+            password: this.password 
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+
+
+
+
+// axios
+
+const options = {
+  url: 'http://localhost/test.htm',
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json;charset=UTF-8'
+  },
+  data: {
+    a: 10,
+    b: 20
+  }
+};
+
+axios(options)
+  .then(response => {
+    console.log(response.status);
+  });
+  
+// fetch
+
+const url = 'http://localhost/test.htm';
+const options = {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json;charset=UTF-8'
+  },
+  body: JSON.stringify({
+    a: 10,
+    b: 20
+  })
+};
+
+fetch(url, options)
+  .then(response => {
+    console.log(response.status);
+  });
+  
+Note: Both produces the same result but :
+
+Axios has url in request object.		Fetch has no url in request object.
+
+Axios is a stand-alone third party  	Fetch is built into most modern browsers; 
+package that can be easily 				no installation is required as such.
+installed.
+
+Axios enjoys built-in XSRF 				Fetch does not.
+protection.	
+
+Axios uses the data property.			Fetch uses the body property.
+
+Axios’ data contains the object.		Fetch’s body has to be stringified.
+
+Axios request is ok when status is 		Fetch request is ok when response 
+200 and statusText is ‘OK’.				object contains the ok property.
+
+Axios performs automatic transforms 	Fetch is a two-step process when
+of JSON data.	 						handling JSON data- first, to make the
+										 actual request; second, to call the 
+                                         .json() method on the response.
+                                         
+Axios allows cancelling request and 	Fetch does not.
+request timeout.
+
+Axios has the ability to intercept 		Fetch, by default, doesn’t provide a
+HTTP requests.							way to intercept requests.
+
+Axios has built-in support for 			Fetch does not support upload progress.
+download progress.	
+
+Axios has wide browser support.			Fetch only supports Chrome 42+, Firefox
+										39+, Edge 14+, and Safari 10.1+ 
+                                        (This is known as Backward 
+                                        Compatibility).
+9
+
+
+-->
