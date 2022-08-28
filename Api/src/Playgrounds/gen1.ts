@@ -30,9 +30,9 @@ const UserTC = schemaComposer.createObjectTC({
 const InputTC = schemaComposer.createObjectTC({
     name: 'UserConnectDataInput',
     fields: {
-      accessToken: 'String!'
+        accessToken: 'String!'
     }
-  });
+});
 const InputITC = toInputObjectType(InputTC);
 
 
@@ -41,7 +41,7 @@ schemaComposer.Query.addFields({
     User: {
         type: UserTC,
         args: { input: InputITC },
-        resolve: (_, args) => {
+        resolve: (_:any, args:any) => {
             const id = args.id
             return find(auth, {_id:id})
         },
@@ -57,7 +57,7 @@ schemaComposer.Mutation.addFields({
             email       : "String",
             password    : "String"
         },
-        resolve:(_, args)=>{
+        resolve:(_:any, args:any)=>{
             const user = {
                 _id : getRandomInt(3, 2000),
                 firstName:args.firstName , 
